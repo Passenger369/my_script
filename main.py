@@ -13,12 +13,13 @@ from pathlib import Path
 
 def main():
     var = input("Enter Current JobLog: ")
+    info = input("Enter comments: ")
     date = datetime.datetime.now().strftime('%d/%m/%Y')
     time = datetime.datetime.now().strftime('%H:%M:%S')
     tz = datetime.datetime.now().astimezone().strftime('%Z')
-    print(date, time, tz, var)
+    print(date, time, tz, var, info)
     input_var = [
-        date, time, tz, var
+        date, time, tz, var, info
     ]
 
     # Check file exist
@@ -29,7 +30,7 @@ def main():
     except FileNotFoundError:
         with open('joblog.csv', 'w', newline='') as notfoundcsvfile:
             csvwriter = csv.writer(notfoundcsvfile)
-            csvwriter.writerows([["Date","Time","Timezone","JobLog"],
+            csvwriter.writerows([["Date","Time","Timezone","JobLog","Comments"],
                                 (input_var)])
     else:
         with open('joblog.csv', 'a', newline='') as writecsvfile:
